@@ -42,5 +42,19 @@ public class Medico {
 	
 	@Embedded 
 	private Endereco endereco;
-	//para ele ficar em classe separada, mas o banco de dados considera que faz parte da mesma tabela!
+
+    public void atualizarInformacoes(DadosAtualizacaoMedico dados) {
+
+		if(dados.nome() != null){
+			this.nome = dados.nome();
+		}
+		if(dados.telefone() != null){
+			this.telefone = dados.telefone();
+		}
+		if(dados.endereco() != null){
+			this.endereco.atuualizarInfomacoes(dados.endereco());
+		}
+
+    }
+    //para ele ficar em classe separada, mas o banco de dados considera que faz parte da mesma tabela!
 }
