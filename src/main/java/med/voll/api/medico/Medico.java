@@ -30,7 +30,7 @@ public class Medico {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //ver o que é isso
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //ver o que é isso!!
 	private Long id;
 	private String nome;
 	private String email;
