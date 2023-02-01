@@ -18,6 +18,7 @@ public class Medico {
 
 	public Medico(DadosCadastroMedico dados) {
 		// TODO Auto-generated constructor stub
+		this.ativo = true;
 		this.nome = dados.nome();
 		this.email = dados.email();
 		this.telefone = dados.telefone();
@@ -43,6 +44,8 @@ public class Medico {
 	@Embedded 
 	private Endereco endereco;
 
+	private boolean ativo;
+
     public void atualizarInformacoes(DadosAtualizacaoMedico dados) {
 
 		if(dados.nome() != null){
@@ -56,5 +59,9 @@ public class Medico {
 		}
 
     }
-    //para ele ficar em classe separada, mas o banco de dados considera que faz parte da mesma tabela!
+
+	public void excluir() {
+		this.ativo = false;
+	}
+	//para ele ficar em classe separada, mas o banco de dados considera que faz parte da mesma tabela!
 }

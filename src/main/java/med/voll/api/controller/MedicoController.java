@@ -28,7 +28,7 @@ public class MedicoController {
 
 	@GetMapping
 	public Page<DadosListagemMedico> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
-		return repository.findAll(paginacao).map(DadosListagemMedico::new);
+		return repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new);
 	} //PAGINADO
 
 	@PutMapping
@@ -37,5 +37,18 @@ public class MedicoController {
 		var medico = repository.getReferenceById(dados.id());
 		medico.atualizarInformacoes(dados);
 	}
+//	@DeleteMapping("/{id}") //entre chaves indica ser parametro dinamico
+//	public void excluir(@PathVariable Long id){ //pathvariable indica que o parametro do metodo é o mesmo do delete maping, id, e id
+//		repository.deleteById(id);
+//	}
+
+	@DeleteMapping("/{id}") //entre chaves indica ser parametro dinamico
+	@Transactional
+	public void excluir(@PathVariable Long id){ //pathvariable indica que o parametro do metodo é o mesmo do delete maping, id, e id
+		var medico = repository.getReferenceById(id);
+		medico.excluir();
+	}
+
+
 }
 	
