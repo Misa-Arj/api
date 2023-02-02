@@ -24,9 +24,16 @@ public class PacienteController {
 	public Page<DadosListagemPaciente> listar(@PageableDefault(size = 10, sort = {"nome"})Pageable paginacao){
 		return repository.findAll(paginacao).map(DadosListagemPaciente::new); //:: method reference referencia new que é a dto DadosLIstagemPaciente, que pega todos os dados da entidade.
 	}
-
-	public void atualizar (DadosAtualizacaoPaciente dados){
+	@PutMapping
+	@Transactional
+	public void atualizar (@RequestBody @Valid DadosAtualizacaoPaciente dados){
 		var paciente = repository.getReferenceById(dados.id());
 		paciente.atualizarInformacoes(dados);
+	}
+
+	@DeleteMapping("/{id}")
+	public void excluir (@PathVariable Long id){
+		var paciente = repository.getReferenceById(id);
+		paciente.excluir();
 	}
 }
